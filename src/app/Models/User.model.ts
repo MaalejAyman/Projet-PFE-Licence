@@ -1,9 +1,9 @@
 import { Deserializable } from './Deserializable.model';
 export class User implements Deserializable {
-  id: number;
-  name: string;
-  password: string;
-  constructor(Id: number, theName: string, password: string) {this.id = Id ; this.name = theName; this.password = password; }
+  Id: number;
+  Login: string;
+  Password: string;
+  constructor(Id: number, theName: string, password: string) {this.Id = Id ; this.Login = theName; this.Password = password; }
   deserialize(input: any): this {
     return Object.assign(this, input);
   }
