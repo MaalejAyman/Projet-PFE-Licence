@@ -11,7 +11,7 @@ export class UserService {
   public key = 'key';
   public IsAuth = 'false';
   constructor(private http: HttpClient) { }
-  baseUrl = 'https://localhost:44330/api/';
+  baseUrl = 'https://localhost:44331/api/';
   headers = {
     headers : new HttpHeaders({
       'Content-type': 'application/json',
@@ -19,15 +19,15 @@ export class UserService {
     })
   };
   postUser(reg: User): Observable<User> {
-    return this.http.post<User>(this.baseUrl + 'TodoItems', this.CryptUser(reg), this.headers).pipe();
+    return this.http.post<User>(this.baseUrl + 'Users', this.CryptUser(reg), this.headers).pipe();
   }
   getUsers(): Observable<User[]> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<User[]>(this.baseUrl + 'TodoItems', this.headers).pipe(map(data => data.map((data) => new User(null, '', '').deserialize(data))));
+    return this.http.get<User[]>(this.baseUrl + 'Users', this.headers).pipe(map(data => data.map((data) => new User(null, '', '').deserialize(data))));
   }
   getUser(): Observable<User> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<User>(this.baseUrl + 'TodoItems', this.headers).pipe();
+    return this.http.get<User>(this.baseUrl + 'Users', this.headers).pipe();
   }
   Auth(reg: User): boolean {
     return true;
