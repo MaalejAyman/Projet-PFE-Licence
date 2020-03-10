@@ -30,7 +30,7 @@ export class AuthSignupComponent implements OnInit {
   }
   onSubmit() {
     // tslint:disable-next-line: max-line-length
-    if (this.SignUpForm.value.Password === this.SignUpForm.value.Confirm_Password && this.SignUpForm.value.Login !== '' && this.SignUpForm.value.Login !== '') {
+    if (this.SignUpForm.valid && this.SignUpForm.value.Password === this.SignUpForm.value.Confirm_Password) {
    this.register();
   } else {
 
@@ -43,7 +43,7 @@ export class AuthSignupComponent implements OnInit {
     if (this.SignUpForm.value.Password !== this.SignUpForm.value.Confirm_Password) {
       this.str = '\r\nThe password field and the Confirm password field must be the same !!';
     }
-    //alert(str);
+    // alert(str);
   }
  }
  register() {
