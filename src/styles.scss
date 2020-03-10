@@ -25,3 +25,7 @@
 @import "scss/plugins/plugins";
 
 @import "scss/custom";
+input.ng-touched.ng-invalid {
+  border-width: 1px;
+  border-left: red solid 5px;
+}

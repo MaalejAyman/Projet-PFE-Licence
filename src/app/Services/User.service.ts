@@ -39,12 +39,11 @@ export class UserService {
     return CryptoJS.AES.encrypt(str.trim(), key.trim()).toString();
   }
   public CryptUser(reg: User) {
-    reg.Login = this.Cryptage(reg.Login, this.key);
+    reg.Login = reg.Login;
     reg.Password = this.Cryptage(reg.Password, this.key);
     return reg;
   }
   public DecryptUser(reg: User) {
-    reg.Login = this.Decryptage(reg.Login, this.key);
     reg.Password = this.Decryptage(reg.Password, this.key);
     return reg;
   }
