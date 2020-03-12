@@ -25,6 +25,11 @@ export class AuthSignupComponent implements OnInit {
   constructor(private service: UserService, private router: Router) {}
 
   ngOnInit() {
+    if (localStorage.getItem('user') !== null) {
+      this.router.navigateByUrl('/dashboard/default');
+    } else {
+      this.router.navigateByUrl('/auth/signup');
+    }
     this.log = new User(0, '', '');
     this.resp = new User(0, '', '');
     this.str = '';
