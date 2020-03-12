@@ -20,6 +20,7 @@ export class AuthSignupComponent implements OnInit {
   log: User;
   Users: User[];
   public test = 'test';
+  public t: boolean ;
   public str;
   constructor(private service: UserService, private router: Router) {}
 
@@ -32,10 +33,12 @@ export class AuthSignupComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     if (
       this.SignUpForm.valid &&
-      this.SignUpForm.value.Password === this.SignUpForm.value.Confirm_Password
+      this.SignUpForm.value.Password === this.SignUpForm.value.Confirm_Password &&
+      !this.t
     ) {
       this.register();
     } else {
+      this.str = '';
       /*if (this.SignUpForm.value.Login === '') {
       this.str += 'Please Fill the Login field !!';
     }
@@ -48,6 +51,10 @@ export class AuthSignupComponent implements OnInit {
       ) {
         this.str =
           '\r\nThe password field and the Confirm password field must be the same !!';
+      }
+      if (this.t) {
+        this.str =
+          '\r\nThe Login Exists already !!';
       }
       // alert(str);
     }
@@ -66,6 +73,9 @@ export class AuthSignupComponent implements OnInit {
   validateToDoModel() {
     this.log.Login = this.SignUpForm.value.Login;
     this.log.Password = this.SignUpForm.value.Password;
+  }
+  public checkLogin() {
+    this.t = this.service.checkLogin(this.SignUpForm.value.Login);
   }
   /*CheckLoginValidator(control: FormControl): { [s: string]: boolean } {
     if (this.service.checkLogin(control.value)) {

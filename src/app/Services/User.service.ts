@@ -55,14 +55,13 @@ export class UserService {
     return md5.appendStr(str).end();
   }
   public checkLogin(str: string): boolean {
-    let x: boolean;
     this.http.get<boolean>(this.baseUrl + 'Users/CheckLogin/' + str, this.headers).pipe().subscribe(
       (res: any) => {
-        x = res;
+        return res;
       }
     );
 
-    return x;
+    return false;
   }
 }
 
