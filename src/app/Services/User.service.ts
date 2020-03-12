@@ -54,8 +54,8 @@ export class UserService {
     const md5 = new Md5();
     return md5.appendStr(str).end();
   }
-  public checkLogin(str): boolean {
-    let x = false;
+  public checkLogin(str: string): boolean {
+    let x: boolean;
     this.http.get<boolean>(this.baseUrl + 'Users/CheckLogin/' + str, this.headers).pipe().subscribe(
       (res: any) => {
         x = res;
