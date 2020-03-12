@@ -4,12 +4,14 @@ import { Observable } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http' ;
 import {map} from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
+import {Md5} from 'ts-md5/dist/md5';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   public key = 'key';
   public IsAuth = 'false';
+
   constructor(private http: HttpClient) { }
   baseUrl = 'https://localhost:44331/api/';
   headers = {
@@ -19,11 +21,11 @@ export class UserService {
     })
   };
   postUser(reg: User): Observable<User> {
-    return this.http.post<User>(this.baseUrl + 'Users', this.CryptUser(reg), this.headers).pipe();
+    return this.http.post<User>(this.baseUrl + 'Users/PostUser', this.CryptUser(reg), this.headers).pipe();
   }
   getUsers(): Observable<User[]> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<User[]>(this.baseUrl + 'Users', this.headers).pipe(map(data => data.map((data) => new User(null, '', '').deserialize(data))));
+    return this.http.get<User[]>(this.baseUrl + 'Users/GetUsers', this.headers).pipe(map(data => data.map((data) => new User(null, '', '').deserialize(data))));
   }
   getUser(): Observable<User> {
     // tslint:disable-next-line: max-line-length
@@ -40,12 +42,27 @@ export class UserService {
   }
   public CryptUser(reg: User) {
     reg.Login = reg.Login;
-    reg.Password = this.Cryptage(reg.Password, this.key);
+    // reg.Password = this.Cryptage(reg.Password, this.key);
+    reg.Password = this.hashString(reg.Password).toString();
     return reg;
   }
   public DecryptUser(reg: User) {
     reg.Password = this.Decryptage(reg.Password, this.key);
     return reg;
+  }
+  public hashString(str: string) {
+    const md5 = new Md5();
+    return md5.appendStr(str).end();
+  }
+  public checkLogin(str): boolean {
+    let x = false;
+    this.http.get<boolean>(this.baseUrl + 'Users/CheckLogin/' + str, this.headers).pipe().subscribe(
+      (res: any) => {
+        x = res;
+      }
+    );
+
+    return x;
   }
 }
 
