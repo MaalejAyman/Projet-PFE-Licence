@@ -14,7 +14,7 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'dashboard',
+        path: 'Dashboard',
         loadChildren: () => import('./demo/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {

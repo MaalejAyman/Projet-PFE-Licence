@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { User } from './../../../../../Models/User.model';
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {animate, style, transition, trigger} from '@angular/animations';
@@ -34,8 +36,9 @@ export class NavRightComponent implements OnInit, DoCheck {
   public chatMessage: boolean;
   public friendId: boolean;
   public dattaConfig: any;
+  public user = new User(null, 'Filler', '');
 
-  constructor(config: NgbDropdownConfig) {
+  constructor(config: NgbDropdownConfig, private router: Router) {
     config.placement = 'bottom-right';
     this.visibleUserList = false;
     this.chatMessage = false;
@@ -43,9 +46,13 @@ export class NavRightComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('LoggedIn').toString() === 'true')  {
+      this.user = JSON.parse(sessionStorage.getItem('user'));
+    }
   }
 
-  onChatToggle(friend_id) {
+  // tslint:disable-next-line: variable-name
+  onChatToggle(friend_id: boolean) {
     this.friendId = friend_id;
     this.chatMessage = !this.chatMessage;
   }
@@ -56,5 +63,10 @@ export class NavRightComponent implements OnInit, DoCheck {
     } else {
       this.dattaConfig['rtl-layout'] = false;
     }
+  }
+  public Logout() {
+    sessionStorage.removeItem('user');
+    localStorage.setItem('LoggedIn', 'false');
+    this.router.navigateByUrl('/auth/signin');
   }
 }

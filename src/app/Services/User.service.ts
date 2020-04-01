@@ -23,12 +23,7 @@ export class UserService {
   postUser(reg: User): Observable<User> {
     return this.http.post<User>(this.baseUrl + 'Users/PostUser', this.CryptUser(reg), this.headers).pipe();
   }
-  getUsers(): Observable<User[]> {
-    // tslint:disable-next-line: max-line-length
-    return this.http.get<User[]>(this.baseUrl + 'Users/GetUsers', this.headers).pipe(map(data => data.map((data) => new User(null, '', '').deserialize(data))));
-  }
   getUser(): Observable<User> {
-    // tslint:disable-next-line: max-line-length
     return this.http.get<User>(this.baseUrl + 'Users', this.headers).pipe();
   }
   Auth(reg: User): Observable<User> {

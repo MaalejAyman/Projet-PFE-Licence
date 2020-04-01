@@ -18,6 +18,9 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+    if (sessionStorage.getItem('user') === null) {
+      localStorage.setItem('LoggedIn', 'false');
+    }
   }
 
 }

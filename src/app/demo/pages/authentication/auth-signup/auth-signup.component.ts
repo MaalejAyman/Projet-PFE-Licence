@@ -25,7 +25,7 @@ export class AuthSignupComponent implements OnInit {
   constructor(private service: UserService, private router: Router) {}
 
   ngOnInit() {
-    if (localStorage.getItem('user') !== null) {
+    if (localStorage.getItem('LoggedIn') === 'true') {
       this.router.navigateByUrl('/dashboard/default');
     } else {
       this.router.navigateByUrl('/auth/signup');
@@ -82,11 +82,11 @@ export class AuthSignupComponent implements OnInit {
   public checkLogin() {
     this.t = this.service.checkLogin(this.SignUpForm.value.Login);
   }
-  /*CheckLoginValidator(control: FormControl): { [s: string]: boolean } {
+  CheckLoginValidator(control: FormControl): { [s: string]: boolean } {
     if (this.service.checkLogin(control.value)) {
       // tslint:disable-next-line: object-literal-key-quotes
       return{'LoginExists': true};
     }
     return null;
-  }*/
+  }
 }

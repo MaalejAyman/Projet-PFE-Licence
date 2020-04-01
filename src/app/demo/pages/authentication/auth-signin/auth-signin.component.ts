@@ -23,10 +23,11 @@ export class AuthSigninComponent implements OnInit {
   constructor(private service: UserService, private router: Router) { }
 
   ngOnInit() {
-    if (localStorage.getItem('user') !== null) {
-      this.router.navigateByUrl('/dashboard/default');
+    if (localStorage.getItem('LoggedIn') === 'true') {
+      this.router.navigateByUrl('/Dashboard/default');
     } else {
       this.router.navigateByUrl('/auth/signin');
+      localStorage.setItem('LoggedIn', 'false');
     }
     // this.test = false;
     this.log = new User(0, '', '');
@@ -42,8 +43,9 @@ export class AuthSigninComponent implements OnInit {
         this.resp.Id = res.id;
         this.resp.Login = res.login;
         this.resp.Password = res.password;
-        localStorage.setItem('user', JSON.stringify(this.resp));
-        this.router.navigateByUrl('/dashboard/default');
+        sessionStorage.setItem('user', JSON.stringify(this.resp));
+        localStorage.setItem('LoggedIn', 'true');
+        this.router.navigateByUrl('/Dashboard/default');
         } else {
           this.str = 'please check the login details !!';
           this.emptyFields();

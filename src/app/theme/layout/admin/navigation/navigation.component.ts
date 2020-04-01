@@ -7,7 +7,9 @@ import {DattaConfig} from '../../../../app-config';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+  // tslint:disable-next-line: no-output-on-prefix
   @Output() onNavCollapse = new EventEmitter();
+    // tslint:disable-next-line: no-output-on-prefix
   @Output() onNavCollapsedMob = new EventEmitter();
   public dattaConfig: any;
   public navCollapsed;
