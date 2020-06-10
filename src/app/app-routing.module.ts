@@ -16,10 +16,6 @@ const routes: Routes = [
       {
         path: 'Dashboard',
         loadChildren: () => import('./demo/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'sample-page',
-        loadChildren: () => import('./demo/extra/sample-page/sample-page.module').then(m => m.SamplePageModule)
       }
     ]
   },
@@ -32,7 +28,8 @@ const routes: Routes = [
         loadChildren: () => import('./demo/pages/authentication/authentication.module').then(m => m.AuthenticationModule)
       }
     ]
-  }
+  },
+  { path: 'Password', loadChildren: () => import('./demo/dashboard/password/password.module').then(m => m.PasswordModule) }
 ];
 
 @NgModule({

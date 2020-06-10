@@ -44,7 +44,7 @@ const NavigationItems = [
         id: 'Passwords',
         title: 'Passwords',
         type: 'item',
-        url: '/tables/bootstrap',
+        url: '/Dashboard/Passwords',
         classes: 'nav-item',
         icon: 'feather icon-server'
       },
@@ -52,7 +52,7 @@ const NavigationItems = [
         id: 'Roles',
         title: 'Roles',
         type: 'item',
-        url: '/forms/basic',
+        url: '/Dashboard/Roles',
         classes: 'nav-item',
         icon: 'feather icon-server'
       },
@@ -60,7 +60,7 @@ const NavigationItems = [
         id: 'Websites',
         title: 'Websites',
         type: 'item',
-        url: '/tables/bootstrap',
+        url: '/Dashboard/Websites',
         classes: 'nav-item',
         icon: 'feather icon-server'
       }

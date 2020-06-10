@@ -40,9 +40,9 @@ export class AuthSigninComponent implements OnInit {
       this.validateToDoModel();
       this.service.Auth(this.log).subscribe((res: any) => {
         if (res !== null) {
-        this.resp.Id = res.id;
-        this.resp.Login = res.login;
-        this.resp.Password = res.password;
+        this.resp.Id = res.Id;
+        this.resp.Login = res.Login;
+        this.resp.Password = res.Password;
         sessionStorage.setItem('user', JSON.stringify(this.resp));
         localStorage.setItem('LoggedIn', 'true');
         this.router.navigateByUrl('/Dashboard/default');
