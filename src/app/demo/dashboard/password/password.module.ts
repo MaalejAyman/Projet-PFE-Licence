@@ -5,6 +5,7 @@ import { PasswordRoutingModule } from './password-routing.module';
 import { PasswordComponent } from './password.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     PasswordRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ]
 })
 export class PasswordModule { }
