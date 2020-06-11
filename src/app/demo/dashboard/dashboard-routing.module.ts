@@ -12,6 +12,14 @@ const routes: Routes = [
       {
         path: 'Passwords',
         loadChildren: () => import('./Password/Password.module').then(m => m.PasswordModule)
+      },
+      {
+        path: 'Roles',
+        loadChildren: () => import('./Role/Role.module').then(m => m.RoleModule)
+      },
+      {
+        path: 'Websites',
+        loadChildren: () => import('./Website/Website.module').then(m => m.WebsiteModule)
       }
     ]
   }
