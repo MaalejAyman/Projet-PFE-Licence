@@ -1,3 +1,4 @@
+import { FileExplorerComponent } from './theme/shared/file-explorer/file-explorer.component';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -23,6 +24,13 @@ import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-ri
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +59,13 @@ import { HttpClientModule } from '@angular/common/http';
     NgbButtonsModule,
     NgbTabsetModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatGridListModule
   ],
   providers: [NavigationItem],
   bootstrap: [AppComponent]
