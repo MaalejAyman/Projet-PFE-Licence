@@ -25,14 +25,7 @@ export class FileExplorerComponent implements OnInit {
   }>();
   @Output() navigatedDown = new EventEmitter<FileElement>();
   @Output() navigatedUp = new EventEmitter();
-    public f = new FileElement();
   ngOnInit(): void {
-    this.f.id = '0';
-    this.f.isFolder = true;
-    this.f.name = 'test' ;
-    this.f.parent = null;
-    this.fileElements = [];
-    this.fileElements[0] = this.f;
   }
   deleteElement(element: FileElement) {
     this.elementRemoved.emit(element);
@@ -76,4 +69,5 @@ export class FileExplorerComponent implements OnInit {
     event.preventDefault();
     viewChild.openMenu();
   }
+
 }

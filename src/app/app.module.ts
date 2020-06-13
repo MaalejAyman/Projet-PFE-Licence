@@ -1,4 +1,3 @@
-import { FileExplorerComponent } from './theme/shared/file-explorer/file-explorer.component';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -31,6 +30,7 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FileService } from './Services/file.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +67,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatToolbarModule,
     MatGridListModule
   ],
-  providers: [NavigationItem],
+  providers: [NavigationItem,
+    FileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

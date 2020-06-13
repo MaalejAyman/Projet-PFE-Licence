@@ -40,4 +40,7 @@ export class PasswordsService {
   public Cryptage(str: string): string {
     return CryptoJS.AES.encrypt(str.trim(), this.u.Password).toString();
   }
+  public getPassworsds() {
+    return this.http.post<Passwords[]>(this.baseUrl + 'Passwords/GetPasswordsByUser', this.u).pipe();
+  }
 }

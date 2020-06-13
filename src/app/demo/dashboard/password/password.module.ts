@@ -6,6 +6,7 @@ import { PasswordComponent } from './password.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { FileExplorerComponent } from 'src/app/theme/shared/file-explorer/file-explorer.component';
 
 
 @NgModule({

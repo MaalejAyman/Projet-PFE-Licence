@@ -26,7 +26,7 @@ import { RenameDialogComponent } from './modals/rename-dialog/rename-dialog.comp
     MatDialogModule,
     MatInputModule,
     FormsModule,
-    MatButtonModule,
+    MatButtonModule
   ],
   declarations: [FileExplorerComponent, NewFolderDialogComponent, RenameDialogComponent],
   exports: [FileExplorerComponent],
