@@ -49,10 +49,10 @@ const NavigationItems = [
         icon: 'feather icon-server'
       },
       {
-        id: 'Roles',
-        title: 'Roles',
+        id: 'Groupes',
+        title: 'Groupes',
         type: 'item',
-        url: '/Dashboard/Roles',
+        url: '/Dashboard/Groupes',
         classes: 'nav-item',
         icon: 'feather icon-server'
       },

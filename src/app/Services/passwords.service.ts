@@ -23,7 +23,16 @@ export class PasswordsService {
     return this.http
       .post<Passwords>(
         this.baseUrl + 'Passwords/PostPasswords',
-        this.CryptPass(reg),
+        reg,
+        this.headers
+      )
+      .pipe();
+  }
+  UpdatePass(reg: Passwords): Observable<Passwords> {
+    return this.http
+      .post<Passwords>(
+        this.baseUrl + 'Passwords/UpdatePasswords',
+        reg,
         this.headers
       )
       .pipe();
@@ -32,15 +41,29 @@ export class PasswordsService {
     P.Value = this.Cryptage(P.Value);
     return P;
   }
+  public DecryptPass(P: Passwords): Passwords {
+    P.Value = this.Decryptage(P.Value);
+    return P;
+  }
   public Decryptage(str: string): string {
     return CryptoJS.AES.decrypt(str.trim(), this.u.Password).toString(
       CryptoJS.enc.Utf8
     );
   }
+  public DecryptageShared(p: Passwords): string {
+    let x = CryptoJS.AES.decrypt(p.Value2.trim(), p.Value).toString(
+      CryptoJS.enc.Utf8
+    );
+    return x;
+  }
+
   public Cryptage(str: string): string {
     return CryptoJS.AES.encrypt(str.trim(), this.u.Password).toString();
   }
   public getPassworsds() {
     return this.http.post<Passwords[]>(this.baseUrl + 'Passwords/GetPasswordsByUser', this.u).pipe();
+  }
+  public getSharedPassworsds() {
+    return this.http.post<Passwords[]>(this.baseUrl + 'Passwords/GetSharedPasswords', this.u).pipe();
   }
 }

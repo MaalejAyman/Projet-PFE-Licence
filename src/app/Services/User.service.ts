@@ -23,6 +23,9 @@ export class UserService {
   postUser(reg: User): Observable<User> {
     return this.http.post<User>(this.baseUrl + 'Users/PostUser', this.CryptUser(reg), this.headers).pipe();
   }
+  getAllUsers(): Observable<User[]> {
+    return this.http.post<User[]>(this.baseUrl + 'Users/GetUsers', this.headers).pipe();
+  }
   getUser(): Observable<User> {
     return this.http.get<User>(this.baseUrl + 'Users', this.headers).pipe();
   }

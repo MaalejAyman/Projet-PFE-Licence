@@ -29,7 +29,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'Role', loadChildren: () => import('./demo/dashboard/role/role.module').then(m => m.RoleModule) },
+  { path: 'Role', loadChildren: () => import('./demo/dashboard/Groupes/Groupes.module').then(m => m.GroupesModule) },
   { path: 'Website', loadChildren: () => import('./demo/dashboard/website/website.module').then(m => m.WebsiteModule) },
   { path: 'Password', loadChildren: () => import('./demo/dashboard/password/password.module').then(m => m.PasswordModule) }
 ];

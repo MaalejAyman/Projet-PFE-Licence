@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { PasswordRoutingModule } from './password-routing.module';
 import { PasswordComponent } from './password.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { FileExplorerComponent } from 'src/app/theme/shared/file-explorer/file-explorer.component';
+import { MatOptionModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -16,7 +17,9 @@ import { FileExplorerComponent } from 'src/app/theme/shared/file-explorer/file-e
     PasswordRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    MatOptionModule,
+    FormsModule
   ]
 })
 export class PasswordModule { }

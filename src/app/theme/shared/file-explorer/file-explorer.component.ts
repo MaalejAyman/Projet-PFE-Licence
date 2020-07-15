@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FileElement } from './model/file-element';
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -25,6 +26,7 @@ export class FileExplorerComponent implements OnInit {
   }>();
   @Output() navigatedDown = new EventEmitter<FileElement>();
   @Output() navigatedUp = new EventEmitter();
+  @Output() fill = new EventEmitter<string>();
   ngOnInit(): void {
   }
   deleteElement(element: FileElement) {
@@ -34,6 +36,8 @@ export class FileExplorerComponent implements OnInit {
   navigate(element: FileElement) {
     if (element.isFolder) {
       this.navigatedDown.emit(element);
+    } else {
+      this.fill.emit(element.id.slice(0, -1));
     }
   }
 

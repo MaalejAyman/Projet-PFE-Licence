@@ -1,3 +1,4 @@
+import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -29,8 +30,9 @@ import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule} from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { FileService } from './Services/file.service';
+import { MatOptionModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,10 +67,14 @@ import { FileService } from './Services/file.service';
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatOptionModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [NavigationItem,
-    FileService],
+    FileService,
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

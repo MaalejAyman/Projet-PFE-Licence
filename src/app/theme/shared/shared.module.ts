@@ -1,3 +1,4 @@
+import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -45,7 +46,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatInputModule
   ],
   exports: [
     CommonModule,
