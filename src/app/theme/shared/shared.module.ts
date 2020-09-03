@@ -23,6 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RenameDialogComponent } from './file-explorer/modals/rename-dialog/rename-dialog.component';
 import { NewFolderDialogComponent } from './file-explorer/modals/new-folder-dialog/new-folder-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DeleteDialogComponent } from './Modals/delete-dialog/delete-dialog.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -79,7 +80,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SpinnerComponent,
     FileExplorerComponent,
     RenameDialogComponent,
-    NewFolderDialogComponent
+    NewFolderDialogComponent,
+    DeleteDialogComponent
   ],
   providers: [
     {

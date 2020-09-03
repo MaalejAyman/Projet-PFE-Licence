@@ -47,6 +47,32 @@ const NavigationItems = [
         url: '/Dashboard/Passwords',
         classes: 'nav-item',
         icon: 'feather icon-server'
+      }
+    ]
+  }
+];
+const AdminNavigationItems = [
+  {
+    id: 'Menu',
+    title: 'Menu',
+    type: 'group',
+    icon: 'icon-group',
+    children: [
+      {
+        id: 'Home',
+        title: 'Home',
+        type: 'item',
+        url: '/Dashboard/default',
+        classes: 'nav-item',
+        icon: 'feather icon-file-text'
+      },
+      {
+        id: 'Passwords',
+        title: 'Passwords',
+        type: 'item',
+        url: '/Dashboard/Passwords',
+        classes: 'nav-item',
+        icon: 'feather icon-server'
       },
       {
         id: 'Groupes',
@@ -71,6 +97,9 @@ const NavigationItems = [
 @Injectable()
 export class NavigationItem {
   get() {
+    if (localStorage.getItem('IsAdmin') === '1') {
+      return AdminNavigationItems;
+    }
     return NavigationItems;
   }
 }

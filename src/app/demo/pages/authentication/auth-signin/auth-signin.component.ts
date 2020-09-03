@@ -38,13 +38,14 @@ export class AuthSigninComponent implements OnInit {
     this.str = '';
     if (this.SignInForm.valid) {
       this.validateToDoModel();
-      this.service.Auth(this.log).subscribe((res: any) => {
+      this.service.Auth(this.log).toPromise().then((res: any) => {
         if (res !== null) {
         this.resp.Id = res.Id;
         this.resp.Login = res.Login;
         this.resp.Password = res.Password;
         sessionStorage.setItem('user', JSON.stringify(this.resp));
         localStorage.setItem('LoggedIn', 'true');
+        localStorage.setItem('IsAdmin', res.IsAdmin);
         this.router.navigateByUrl('/Dashboard/default');
         } else {
           this.str = 'please check the login details !!';

@@ -6,11 +6,11 @@
           <tbody>
             <tr>
               <th>Name</th>
-              <th>Website</th>
+              <th>Link</th>
             </tr>
-            <tr>
-              <td></td>
-              <td></td>
+            <tr *ngFor="let ws of w" (click)="this.FillFields(ws)">
+              <td>{{ws.Name}}</td>
+              <td>{{ws.Link}}</td>
             </tr>
           </tbody>
         </table>
@@ -28,12 +28,12 @@
           </tr>
           <tr>
             <td><label>Website:</label></td>
-            <td align="right" colspan="2"><input type="text" formControlName="Website"
+            <td align="right" colspan="2"><input type="text" formControlName="Link"
                 class="form-control ng-dirty ng-valid ng-touched"></td>
           </tr>
-            <tr><td colspan="3"><button class="btn btn-secondary" style="width:100%;">Add new</button></td></tr>
-            <tr><td colspan="3"><button class="btn btn-secondary" style="width:100%;">Update</button></td></tr>
-            <tr><td colspan="3"><button class="btn btn-secondary" style="width:100%;">Delete</button></td></tr>
+            <tr><td colspan="3"><button class="btn btn-secondary" style="width:100%;" (click)="insertWS()">Add new</button></td></tr>
+            <tr><td colspan="3"><button class="btn btn-secondary" style="width:100%;" (click)="updateWS()">Update</button></td></tr>
+            <tr><td colspan="3"><button class="btn btn-secondary" style="width:100%;" (click)="DeleteWebSites()">Delete</button></td></tr>
         </table>
         <br />
       </app-card>

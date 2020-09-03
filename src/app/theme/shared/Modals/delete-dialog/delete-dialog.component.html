@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Caution !!</h1>
+
+<mat-dialog-content>
+{{data.Text}}
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="btn btn-secondary" mat-dialog-close>Cancel</button>
+  <button mat-raised-button class="btn btn-secondary" [mat-dialog-close]="maketrue()" color="primary">
+    OK
+  </button>
+</mat-dialog-actions>

@@ -22,9 +22,15 @@ export class FoldersService {
     return this.http.post<Folders[]>(this.baseUrl + 'Folders/FoldersByUserId', this.u, this.headers).pipe();
   }
   InsertFolder(f: Folders) {
-    return this.http.post<Folders[]>(this.baseUrl + 'Folders/PostFolders', f, this.headers).pipe();
+    return this.http.post<Folders>(this.baseUrl + 'Folders/PostFolders', f, this.headers).pipe();
   }
   getLastID() {
     return this.http.post<number>(this.baseUrl + 'Folders/GetLastID', 'null' ).pipe();
+  }
+  RenameFolder(f: Folders) {
+    return this.http.post<number>(this.baseUrl + 'Folders/RenameFolders', f, this.headers).pipe();
+  }
+  DropFolder(f: Folders) {
+    return this.http.post<number>(this.baseUrl + 'Folders/DeleteFolders', f, this.headers).pipe();
   }
 }

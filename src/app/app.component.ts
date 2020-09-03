@@ -7,7 +7,7 @@ import {NavigationEnd, Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'datta-able';
+  title = 'Password Keeper';
 
   constructor(private router: Router) { }
 

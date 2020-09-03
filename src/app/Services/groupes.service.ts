@@ -28,6 +28,9 @@ export class GroupesService {
   getGroupesByUser() {
     return this.http.post<Groupes[]>(this.baseUrl + 'Groupes/GroupesByUserId', this.u, this.headers).pipe();
   }
+  getGroupes() {
+    return this.http.get<Groupes[]>(this.baseUrl + 'Groupes/GetGroupes', this.headers).pipe();
+  }
   InsertGroupe(g: Groupes) {
     return this.http.post<Groupes>(this.baseUrl + 'Groupes/PostGroupes', g, this.headers).pipe();
   }
@@ -36,5 +39,8 @@ export class GroupesService {
   }
   UpdateGroupe(g: Groupes) {
     return this.http.post<Groupes>(this.baseUrl + 'Groupes/UpdateGroupes', g, this.headers).pipe();
+  }
+  DropGroupe(g: Groupes) {
+    return this.http.post<number>(this.baseUrl + 'Groupes/DeleteGroupes', g, this.headers).pipe();
   }
 }

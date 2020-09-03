@@ -67,6 +67,7 @@ export class NavRightComponent implements OnInit, DoCheck {
   public Logout() {
     sessionStorage.removeItem('user');
     localStorage.setItem('LoggedIn', 'false');
+    localStorage.setItem('isRefreshed', 'false');
     this.router.navigateByUrl('/auth/signin');
   }
 }
