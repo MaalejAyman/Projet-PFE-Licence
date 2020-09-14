@@ -24,6 +24,8 @@ export class WebsiteComponent implements OnInit {
   constructor(private wservice: WebSitesService, public dialog: MatDialog,private router: Router) {}
 
   ngOnInit(): void {
+    localStorage.setItem("WSId",null);
+
     if (localStorage.getItem("LoggedIn") === "true") {
       if (localStorage.getItem("IsAdmin") === "0") {
         this.router.navigateByUrl("/Dashboard/default");
@@ -36,8 +38,8 @@ export class WebsiteComponent implements OnInit {
       localStorage.setItem("LoggedIn", "false");
     }
   }
-
   insertWS() {
+    if(this.WForm.valid){
     this.GetSW();
     this.wservice
       .InsertWS(this.ws)
@@ -46,8 +48,17 @@ export class WebsiteComponent implements OnInit {
         this.w = [];
         this.GetWebsitesByUser();
       });
+    }else{
+      let dialogRef = this.dialog.open(DeleteDialogComponent, {
+        data: {
+          Text:
+            "Please check that all the fields are filled !!",
+        },
+      });
+    }
   }
   updateWS() {
+    if(this.WForm.valid && localStorage.getItem("WSId") !== "null"){
     this.GetUpdateSW();
     this.wservice
       .UpdateWS(this.ws)
@@ -56,6 +67,14 @@ export class WebsiteComponent implements OnInit {
         this.w = [];
         this.GetWebsitesByUser();
       });
+    }else{
+      let dialogRef = this.dialog.open(DeleteDialogComponent, {
+        data: {
+          Text:
+            "Please select a website !!",
+        },
+      });
+    }
   }
   GetWebsitesByUser() {
     this.wservice
@@ -90,6 +109,7 @@ export class WebsiteComponent implements OnInit {
       Name: "",
       Link: "",
     });
+    localStorage.setItem("WSId",null);
   }
   DeleteWebSites() {
     if (localStorage.getItem("WSId") != null) {

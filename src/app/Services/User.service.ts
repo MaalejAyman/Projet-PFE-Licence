@@ -20,8 +20,8 @@ export class UserService {
       'Access-Control-Allow-Origin': '*'
     })
   };
-  postUser(reg: User): Observable<User> {
-    return this.http.post<User>(this.baseUrl + 'Users/PostUser', this.CryptUser(reg), this.headers).pipe();
+  postUser(reg: User) {
+    return this.http.post(this.baseUrl + 'Users/PostUser', this.CryptUser(reg), this.headers).pipe();
   }
   getAllUsers(): Observable<User[]> {
     return this.http.post<User[]>(this.baseUrl + 'Users/GetUsers', this.headers).pipe();
@@ -52,14 +52,8 @@ export class UserService {
     const md5 = new Md5();
     return md5.appendStr(str).end();
   }
-  public checkLogin(str: string): boolean {
-    this.http.get<boolean>(this.baseUrl + 'Users/CheckLogin/' + str, this.headers).pipe().subscribe(
-      (res: any) => {
-        return res;
-      }
-    );
-
-    return false;
+  public checkLogin(str: string): Observable<boolean> {
+    return this.http.get<boolean>(this.baseUrl + 'Users/CheckLogin/' + str, this.headers).pipe();
   }
 }
 

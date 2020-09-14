@@ -36,7 +36,7 @@ export class AuthSigninComponent implements OnInit {
   }
   onLoginChange() {
     this.str = '';
-    if (this.SignInForm.valid) {
+    if (this.SignInForm.valid ) {
       this.validateToDoModel();
       this.service.Auth(this.log).toPromise().then((res: any) => {
         if (res !== null) {

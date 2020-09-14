@@ -61,6 +61,7 @@ export class PasswordComponent implements OnInit {
     Website: new FormControl("", [Validators.required]),
   });
   ngOnInit(): void {
+    localStorage.setItem("passId",null);
     if (localStorage.getItem("LoggedIn") === "true") {
 
       this.t = [];
@@ -129,7 +130,7 @@ export class PasswordComponent implements OnInit {
       let dialogRef = this.dialog.open(DeleteDialogComponent, {
         data: {
           Text:
-            "Please either select a password or check that all the fields are filled !!",
+            "Please check that all the fields are filled !!",
         },
       });
     }
@@ -166,7 +167,7 @@ export class PasswordComponent implements OnInit {
       let dialogRef = this.dialog.open(DeleteDialogComponent, {
         data: {
           Text:
-            "Please either select a password or check that all the fields are filled !!",
+            "Please either select a password !!",
         },
       });
     }

@@ -29,6 +29,7 @@ export class GroupesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    localStorage.setItem("grp",null);
     if (localStorage.getItem("LoggedIn") === "true") {
       if (localStorage.getItem("IsAdmin") === "0") {
         this.router.navigateByUrl("/Dashboard/default");
@@ -44,6 +45,7 @@ export class GroupesComponent implements OnInit {
     }
   }
   InsertGroupes() {
+    if (this.GForm.valid) {
     let grp = new Groupes();
     grp.Name = this.GForm.value.Name;
     this.getSelectedUsers();
@@ -54,6 +56,14 @@ export class GroupesComponent implements OnInit {
         this.g = [];
         this.GetGroupesByUser();
       });
+    }else{
+      let dialogRef = this.dialog.open(DeleteDialogComponent, {
+        data: {
+          Text:
+            "Please Fill the field before !!",
+        },
+      });
+    }
   }
   GetAllUsers() {
     this.Uservice.getAllUsers()
@@ -127,7 +137,7 @@ export class GroupesComponent implements OnInit {
     });
   }
   updateGrp() {
-    if (localStorage.getItem("grp") != null) {
+    if (this.GForm.valid && localStorage.getItem("grp") !== "null") {
     let grp = new Groupes();
     grp.Id = parseInt(localStorage.getItem("grp"));
     grp.Name = this.GForm.value.Name;
@@ -143,14 +153,15 @@ export class GroupesComponent implements OnInit {
       let dialogRef = this.dialog.open(DeleteDialogComponent, {
         data: {
           Text:
-            "Please select a groupe before",
+            "Please select a groupe before !!",
         },
       });
     }
   }
   DropGrp() {
     let grp = new Groupes();
-    if (localStorage.getItem("grp") != null) {
+
+    if (localStorage.getItem("grp") !== "null") {
       let dialogRef = this.dialog.open(DeleteDialogComponent, {
         data: {
           Text:
@@ -170,7 +181,7 @@ export class GroupesComponent implements OnInit {
             });
         }
       });
-    }else{
+    }else if (localStorage.getItem("grp") == "null"){
       let dialogRef = this.dialog.open(DeleteDialogComponent, {
         data: {
           Text:

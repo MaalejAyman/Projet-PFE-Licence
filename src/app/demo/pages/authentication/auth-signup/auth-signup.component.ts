@@ -35,6 +35,7 @@ export class AuthSignupComponent implements OnInit {
     this.str = '';
   }
   onSubmit() {
+    this.checkLogin();
     // tslint:disable-next-line: max-line-length
     if (
       this.SignUpForm.valid &&
@@ -44,12 +45,12 @@ export class AuthSignupComponent implements OnInit {
       this.register();
     } else {
       this.str = '';
-      /*if (this.SignUpForm.value.Login === '') {
+      if (this.SignUpForm.value.Login === '') {
       this.str += 'Please Fill the Login field !!';
     }
-    if (this.SignUpForm.value.Password === '') {
+      if (this.SignUpForm.value.Password === '') {
       this.str += '\r\nPlease Fill the Password field !!';
-    }*/
+    }
       if (
         this.SignUpForm.value.Password !==
         this.SignUpForm.value.Confirm_Password
@@ -68,9 +69,6 @@ export class AuthSignupComponent implements OnInit {
     if (this.SignUpForm.valid) {
       this.validateToDoModel();
       this.service.postUser(this.log).subscribe((res: any) => {
-        this.resp.Login = res.login;
-        this.resp.Password = res.password;
-        this.resp = this.service.DecryptUser(this.resp);
         this.router.navigateByUrl('/auth/signin');
       });
     }
@@ -80,7 +78,9 @@ export class AuthSignupComponent implements OnInit {
     this.log.Password = this.SignUpForm.value.Password;
   }
   public checkLogin() {
-    this.t = this.service.checkLogin(this.SignUpForm.value.Login);
+    this.service.checkLogin(this.SignUpForm.value.Login).toPromise().then((res: any) => {
+      this.t = res;
+    });
   }
   CheckLoginValidator(control: FormControl): { [s: string]: boolean } {
     if (this.service.checkLogin(control.value)) {

@@ -1,3 +1,5 @@
+import { NotesService } from './../../../Services/notes.service';
+import { Notes } from './../../../Models/notes.model';
 import { Component, OnInit, ViewChild, ElementRef, VERSION } from '@angular/core';
 import '../../../../assets/charts/amchart/amcharts.js';
 import '../../../../assets/charts/amchart/gauge.js';
@@ -9,6 +11,10 @@ import '../../../../assets/charts/amchart/usaLow.js';
 import '../../../../assets/charts/amchart/radar.js';
 import '../../../../assets/charts/amchart/worldLow.js';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DeleteDialogComponent } from 'src/app/theme/shared/Modals/delete-dialog/delete-dialog.component';
+import { Websites } from 'src/app/Models/WebSites.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-default',
@@ -40,33 +46,29 @@ export class DefaultComponent implements OnInit {
     }
   ];
   version: string = `Angular v${VERSION.full}`;
-
+  NotesUser: Notes[];
   dictionary: Array<string>;
-
+  Note: Notes;
   lowercase: boolean = this.checkboxes[0].checked;
   uppercase: boolean = this.checkboxes[1].checked;
   numbers: boolean = this.checkboxes[2].checked;
   symbols: boolean = this.checkboxes[3].checked;
-
+  NForm = new FormGroup({
+    Text: new FormControl('', [Validators.required]),
+  });
   passwordLenght = 8;
   buttonLabel = 'Generate';
   newPassword: string;
   @ViewChild('passwordOutput') password: ElementRef;
-  private copyPassword() {
-    const inputElement = this.password.nativeElement as HTMLInputElement;
-    inputElement.select();
-    document.execCommand('copy');
-  }
-  updatePasswordLength(event) {
-    this.passwordLenght = event.target.value;
-  }
-  constructor(private router: Router) { }
+  constructor(private router: Router, private Nservice: NotesService, private dialog: MatDialog) { }
   ngOnInit() {
     if (localStorage.getItem('LoggedIn') === 'true') {
       if (localStorage.getItem('isRefreshed') === 'false') {
         localStorage.setItem('isRefreshed', 'true');
         this.refresh();
       }
+      localStorage.setItem('NotesId', null);
+      this.GetNotesByUser();
     } else {
       this.router.navigateByUrl('/auth/signin');
       localStorage.setItem('LoggedIn', 'false');
@@ -74,6 +76,14 @@ export class DefaultComponent implements OnInit {
   }
   refresh(): void {
     window.location.reload();
+  }
+  private copyPassword() {
+    const inputElement = this.password.nativeElement as HTMLInputElement;
+    inputElement.select();
+    document.execCommand('copy');
+  }
+  updatePasswordLength(event) {
+    this.passwordLenght = event.target.value;
   }
   copyInputMessage(inputElement) {
     inputElement.select();
@@ -113,6 +123,98 @@ export class DefaultComponent implements OnInit {
     this.newPassword = newPassword;
     this.copyPassword();
     this.buttonLabel = 'Copied!';
-    setTimeout(() => { this.buttonLabel = 'Generate'; } , 1500);
+    setTimeout(() => { this.buttonLabel = 'Generate'; }, 1500);
+  }
+  insertNotes() {
+    if (this.NForm.valid) {
+      this.GetNote();
+      this.Nservice
+        .InsertNotes(this.Note)
+        .toPromise()
+        .then((res) => {
+          this.NotesUser = [];
+          this.GetNotesByUser();
+        });
+    } else {
+      let dialogRef = this.dialog.open(DeleteDialogComponent, {
+        data: {
+          Text:
+            'Please check that all the fields are filled !!',
+        },
+      });
+    }
+  }
+  updateNotes() {
+    if (this.NForm.valid && localStorage.getItem('NotesId') !== 'null') {
+      this.GetUpdateNote();
+      this.Nservice
+        .UpdateNotes(this.Note)
+        .toPromise()
+        .then((res) => {
+          this.NotesUser = [];
+          this.GetNotesByUser();
+        });
+    } else {
+      let dialogRef = this.dialog.open(DeleteDialogComponent, {
+        data: {
+          Text:
+            'Please select a Note !!',
+        },
+      });
+    }
+  }
+  GetNotesByUser() {
+    this.Nservice
+      .GetNotesByUser()
+      .toPromise()
+      .then((res) => {
+        if (res != null) {
+          this.NotesUser = res;
+        }
+      });
+  }
+  FillFields(N: Notes) {
+    this.NForm.setValue({
+      Text: N.Text,
+    });
+    localStorage.setItem('NotesId', N.Id.toString());
+  }
+  GetNote() {
+    this.Note = new Notes();
+    this.Note.Text = this.NForm.value.Text;
+  }
+  GetUpdateNote() {
+    this.Note = new Notes();
+    this.Note.Id = parseInt(localStorage.getItem('NotesId'));
+    this.Note.Text = this.NForm.value.Text;
+  }
+  emptyFields() {
+    this.NForm.setValue({
+      Text: '',
+    });
+    localStorage.setItem('NotesId', null);
+  }
+  DeleteNotes() {
+    if (localStorage.getItem('NotesId') != null) {
+      let dialogRef = this.dialog.open(DeleteDialogComponent, {
+        data: {
+          Text:
+            'Do you realy want to delete the this Note ?',
+        },
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.GetUpdateNote();
+          this.Nservice
+            .DropNotes(this.Note)
+            .toPromise()
+            .then((res) => {
+                this.NotesUser = [];
+                this.GetNotesByUser();
+            });
+          this.emptyFields();
+        }
+      });
+    }
   }
 }

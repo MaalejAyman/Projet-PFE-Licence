@@ -30,6 +30,9 @@ export class FoldersService {
   RenameFolder(f: Folders) {
     return this.http.post<number>(this.baseUrl + 'Folders/RenameFolders', f, this.headers).pipe();
   }
+  MoveFolder(f: Folders) {
+    return this.http.post<number>(this.baseUrl + 'Folders/MoveFolders', f, this.headers).pipe();
+  }
   DropFolder(f: Folders) {
     return this.http.post<number>(this.baseUrl + 'Folders/DeleteFolders', f, this.headers).pipe();
   }

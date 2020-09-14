@@ -1,8 +1,8 @@
 <div class="row no-gutters" style="height: 100%;display:flex;flex-direction: row;">
-
-  <div class="col no-gutters" style="height: 100%;width:70%;">
-    <form class="form">
-      <app-card cardTitle="Password Generator" [options]="false">
+  <div class="col no-gutters" style="display: flex;">
+    <app-card cardTitle="Password Generator" [options]="false" style="display: flex;
+      flex: 1;">
+      <form class="form">
         <table class="t1">
           <tr>
             <td><label></label></td>
@@ -48,9 +48,60 @@
           </tr>
         </table>
         <br />
-      </app-card>
-    </form>
+      </form>
+    </app-card>
   </div>
-  <div class="col no-gutters" style="display: flex;">
+  <div class="col no-gutters" style="height: 100%;width:70%;">
+    <form class="form" [formGroup]="NForm">
+      <app-card cardTitle="Notes" [options]="false">
+        <table class="t1">
+          <tr>
+            <td><label></label></td>
+            <td align="right" colspan="2">
+              <textarea id="Text" class="form-control ng-dirty ng-valid ng-touched"
+                style="text-align:left" type="text" formControlName="Text"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <button class="btn btn-secondary" style="width:100%;" id="genBtn" (click)="insertNotes()">Add
+                Note</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <button class="btn btn-secondary" style="width:100%;" id="genBtn" (click)="updateNotes()">Update
+                Note</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <button class="btn btn-secondary" style="width:100%;" id="genBtn" (click)="DeleteNotes()">Delete
+                Note</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" rowspan="3">
+              <div id="table-wrapper2">
+                <table class="table table-hover">
+                  <tbody>
+                    <tr>
+                      <th>Notes</th>
+                    </tr>
+                    <tr *ngFor="let n of NotesUser">
+                      <td align="left" (click)="FillFields(n)">
+                        <p id="{{n}}" >{{n.Text}}</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+      <br />
+    </app-card>
+  </form>
   </div>
 </div>
