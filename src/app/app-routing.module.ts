@@ -10,32 +10,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '../auth/signin',
+        redirectTo: '/auth/signin',
         pathMatch: 'full'
       },
       {
-        path: 'dashboard',
+        path: 'Dashboard',
         loadChildren: () => import('./demo/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'basic',
-        loadChildren: () => import('./demo/ui-elements/ui-basic/ui-basic.module').then(m => m.UiBasicModule)
-      },
-      {
-        path: 'forms',
-        loadChildren: () => import('./demo/pages/form-elements/form-elements.module').then(m => m.FormElementsModule)
-      },
-      {
-        path: 'tables',
-        loadChildren: () => import('./demo/pages/tables/tables.module').then(m => m.TablesModule)
-      },
-      {
-        path: 'charts',
-        loadChildren: () => import('./demo/pages/core-chart/core-chart.module').then(m => m.CoreChartModule)
-      },
-      {
-        path: 'sample-page',
-        loadChildren: () => import('./demo/extra/sample-page/sample-page.module').then(m => m.SamplePageModule)
       }
     ]
   },
@@ -48,7 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('./demo/pages/authentication/authentication.module').then(m => m.AuthenticationModule)
       }
     ]
-  }
+  },
+  { path: 'Role', loadChildren: () => import('./demo/dashboard/Groupes/Groupes.module').then(m => m.GroupesModule) },
+  { path: 'Website', loadChildren: () => import('./demo/dashboard/website/website.module').then(m => m.WebsiteModule) },
+  { path: 'Password', loadChildren: () => import('./demo/dashboard/password/password.module').then(m => m.PasswordModule) }
 ];
 
 @NgModule({

@@ -1,0 +1,43 @@
+<div class="row no-gutters" style="height: 100%;display:flex;flex-direction: row;">
+  <div class="col no-gutters" style="display: flex;">
+    <app-card cardTitle="List" [options]="false" style="display: flex;flex: 1;">
+      <div id="table-wrapper" style="height:500px">
+        <table id="Role-manager-table" class="table table-hover">
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th>Link</th>
+            </tr>
+            <tr *ngFor="let ws of w" (click)="this.FillFields(ws)">
+              <td>{{ws.Name}}</td>
+              <td>{{ws.Link}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col no-gutters" style="height: 100%;width:70%;">
+    <form [formGroup]="WForm" class="form">
+      <app-card cardTitle="Websites" [options]="false">
+        <table class="t1" style="height:500px">
+          <tr>
+            <td><label>Name:</label></td>
+            <td align="right" colspan="2"><input type="text" formControlName="Name"
+                class="form-control ng-dirty ng-valid ng-touched"></td>
+          </tr>
+          <tr>
+            <td><label>Website:</label></td>
+            <td align="right" colspan="2"><input type="text" formControlName="Link"
+                class="form-control ng-dirty ng-valid ng-touched"></td>
+          </tr>
+            <tr><td colspan="3"><button class="btn btn-secondary" style="width:100%;" (click)="insertWS()">Add new</button></td></tr>
+            <tr><td colspan="3"><button class="btn btn-secondary" style="width:100%;" (click)="updateWS()">Update</button></td></tr>
+            <tr><td colspan="3"><button class="btn btn-secondary" style="width:100%;" (click)="DeleteWebSites()">Delete</button></td></tr>
+        </table>
+        <br />
+      </app-card>
+    </form>
+  </div>
+</div>
+

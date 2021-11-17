@@ -7,7 +7,19 @@ const routes: Routes = [
     children: [
       {
         path: 'default',
-        loadChildren: () => import('./default/default.module').then(m => m.DefaultModule)
+        loadChildren: () => import('./Home/default.module').then(m => m.DefaultModule)
+      },
+      {
+        path: 'Passwords',
+        loadChildren: () => import('./Password/Password.module').then(m => m.PasswordModule)
+      },
+      {
+        path: 'Groupes',
+        loadChildren: () => import('./Groupes/Groupes.module').then(m => m.GroupesModule)
+      },
+      {
+        path: 'Websites',
+        loadChildren: () => import('./Website/Website.module').then(m => m.WebsiteModule)
       }
     ]
   }

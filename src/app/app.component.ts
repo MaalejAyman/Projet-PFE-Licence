@@ -7,7 +7,7 @@ import {NavigationEnd, Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'datta-able';
+  title = 'Password Keeper';
 
   constructor(private router: Router) { }
 
@@ -18,6 +18,9 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+    if (sessionStorage.getItem('user') === null) {
+      localStorage.setItem('LoggedIn', 'false');
+    }
   }
 
 }

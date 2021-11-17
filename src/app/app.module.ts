@@ -1,3 +1,4 @@
+import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,17 @@ import { NavLeftComponent } from './theme/layout/admin/nav-bar/nav-left/nav-left
 import { NavSearchComponent } from './theme/layout/admin/nav-bar/nav-left/nav-search/nav-search.component';
 import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-right.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { FileService } from './Services/file.service';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -48,9 +60,22 @@ import { ConfigurationComponent } from './theme/layout/admin/configuration/confi
     NgbDropdownModule,
     NgbTooltipModule,
     NgbButtonsModule,
-    NgbTabsetModule
+    NgbTabsetModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatOptionModule,
+    MatInputModule,
+    MatButtonModule
   ],
-  providers: [NavigationItem],
+  providers: [NavigationItem,
+    FileService,
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

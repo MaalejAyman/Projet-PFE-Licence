@@ -1,0 +1,107 @@
+<div class="row no-gutters" style="height: 100%;display:flex;flex-direction: row;">
+  <div class="col no-gutters" style="display: flex;">
+    <app-card cardTitle="Password Generator" [options]="false" style="display: flex;
+      flex: 1;">
+      <form class="form">
+        <table class="t1">
+          <tr>
+            <td><label></label></td>
+            <td align="right" colspan="2">
+              <div class="input-group mb-4">
+                <input id="passwordOutput" value="{{newPassword}}" class="form-control ng-dirty ng-valid ng-touched"
+                  style="text-align:center" type="text" #passwordOutput readonly>
+                <div class="input-group-prepend">
+                  <button class="btn btn-secondary" type="button"
+                    (click)="copyInputMessage(passwordOutput)">copy</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <button class="btn btn-secondary" style="width:100%;" id="genBtn" (click)="generatePassword()">Generate
+                Password</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" rowspan="3">
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <th>Criteria</th>
+                    <th align="Center"></th>
+                  </tr>
+                  <tr>
+                    <td align="center">Length</td>
+                    <td align="center"><input type="range" (change)="updatePasswordLength($event)" min="8" max="32"
+                        step="1" value="{{passwordLenght}}" class="form-control" id="length" /></td>
+                    <td align="center">{{passwordLenght}}</td>
+                  </tr>
+                  <tr *ngFor="let checkbox of checkboxes">
+                    <td align="center">{{checkbox.id}}</td>
+                    <td align="center"><input type="checkbox" class="form-control" id="{{checkbox.id}}"
+                        (change)="updateCheckboxValue($event)" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <br />
+      </form>
+    </app-card>
+  </div>
+  <div class="col no-gutters" style="height: 100%;width:70%;">
+    <form class="form" [formGroup]="NForm">
+      <app-card cardTitle="Notes" [options]="false">
+        <table class="t1">
+          <tr>
+            <td><label></label></td>
+            <td align="right" colspan="2">
+              <textarea id="Text" class="form-control ng-dirty ng-valid ng-touched"
+                style="text-align:left" type="text" formControlName="Text"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <button class="btn btn-secondary" style="width:100%;" id="genBtn" (click)="insertNotes()">Add
+                Note</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <button class="btn btn-secondary" style="width:100%;" id="genBtn" (click)="updateNotes()">Update
+                Note</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <button class="btn btn-secondary" style="width:100%;" id="genBtn" (click)="DeleteNotes()">Delete
+                Note</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" rowspan="3">
+              <div id="table-wrapper2">
+                <table class="table table-hover">
+                  <tbody>
+                    <tr>
+                      <th>Notes</th>
+                    </tr>
+                    <tr *ngFor="let n of NotesUser">
+                      <td align="left" (click)="FillFields(n)">
+                        <p id="{{n}}" >{{n.Text}}</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+      <br />
+    </app-card>
+  </form>
+  </div>
+</div>
